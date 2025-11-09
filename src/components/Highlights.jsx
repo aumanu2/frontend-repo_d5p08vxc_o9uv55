@@ -1,40 +1,53 @@
 import React from 'react';
 import { ShieldCheck, Rocket, Globe, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const features = [
   {
     icon: ShieldCheck,
-    title: 'Certified Quality',
-    desc: 'ISO, CE, RoHS compliant manufacturing with rigorous QA at every stage.',
+    title: 'Rock-solid reliability',
+    desc: '99.99% uptime backed by redundant backbone and proactive monitoring.'
   },
-  { icon: Rocket, title: 'High Performance', desc: 'Ultra‑low attenuation fibers designed for 5G, FTTx, and data center loads.' },
-  { icon: Globe, title: 'Global Supply', desc: 'Reliable fulfillment across 60+ countries with on‑time delivery.' },
-  { icon: Award, title: 'Proven Reliability', desc: 'Thousands of kilometers deployed in harsh conditions worldwide.' },
+  { icon: Rocket, title: 'Blazing speeds', desc: 'Gigabit plans that keep up with your busiest days and nights.' },
+  { icon: Globe, title: 'Everywhere coverage', desc: 'Expanding city by city with local support that actually cares.' },
+  { icon: Award, title: 'Fair & transparent', desc: 'No hidden fees. No throttling. Cancel anytime with no hassle.' }
 ];
 
-const Highlights = () => {
+export default function Highlights() {
   return (
-    <section className="bg-neutral-50 py-20">
+    <section className="relative bg-white py-20 text-neutral-900">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-['Manrope'] text-2xl font-bold text-neutral-900 sm:text-3xl">Built for mission‑critical networks</h2>
-          <p className="mt-2 text-neutral-600">Everything we make is engineered to perform, endure, and scale with demand.</p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-2xl text-center"
+        >
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Why switch to Fiber Connect?</h2>
+          <p className="mt-3 text-neutral-600">Simple plans, better experience, and support that feels human.</p>
+        </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((f) => (
-            <div key={f.title} className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
-                {React.createElement(f.icon, { className: 'h-5 w-5' })}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: i * 0.06 }}
+              className="group rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-lg"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/10 text-pink-600">
+                <f.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-base font-semibold text-neutral-900">{f.title}</h3>
-              <p className="mt-1 text-sm text-neutral-600">{f.desc}</p>
-            </div>
+              <h3 className="mt-4 text-lg font-semibold">{f.title}</h3>
+              <p className="mt-2 text-sm text-neutral-600">{f.desc}</p>
+              <div className="mt-6 h-1 w-0 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500 transition-all duration-300 group-hover:w-20" />
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Highlights;
+}
